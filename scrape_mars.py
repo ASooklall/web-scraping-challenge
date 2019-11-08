@@ -45,7 +45,7 @@ def scrape():
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
     # scrape for featured link
-    mars['featured_image'] = soup.find('a', class_='button fancybox')['data-fancybox-href']
+    featured_image = soup.find('a', class_='button fancybox')['data-fancybox-href']
     # url received as a partial, concatenate with origin url to get full url
     mars['featured_image_url'] = 'https://www.jpl.nasa.gov'+featured_image
     browser.quit()
