@@ -8,7 +8,7 @@ import pandas as pd
 import lxml
 from bs4 import BeautifulSoup
 from splinter import Browser
-import requests
+import time
 
 
 def init_browser():
@@ -34,7 +34,7 @@ def scrape():
     #scrape for featured title and text
     mars['news_title'] = soup.find('div', class_='content_title').text
     mars['news_text'] = soup.find('div', class_='rollover_description_inner').text
-    browser.quit()
+    time.sleep(1)
 
 ############################################
 ## JPL Mars Space Images - Featured Image ##
@@ -48,7 +48,7 @@ def scrape():
     featured_image = soup.find('a', class_='button fancybox')['data-fancybox-href']
     # url received as a partial, concatenate with origin url to get full url
     mars['featured_image_url'] = 'https://www.jpl.nasa.gov'+featured_image
-    browser.quit()
+    time.sleep(1)
 
 ##################
 ## Mars Weather ##
@@ -60,7 +60,7 @@ def scrape():
     soup = BeautifulSoup(html, 'html.parser')
     #search for latest tweet and save to variable
     mars['mars_weather'] = soup.find('div', class_="js-tweet-text-container").text
-    browser.quit()
+    time.sleep(1)
 
 ################
 ## Mars Facts ##
@@ -74,16 +74,19 @@ def scrape():
     mars_df.columns=['Statistic','Value']
     # convert dataframe to html table string
     mars['mars_df_html'] = mars_df.to_html()
+    time.sleep(1)
 
 ######################
 ## Mars Hemispheres ##
 ######################
     #filler
+    browser.quit()
 
 
 ##############
 # End Scrape #
 ##############
+
     return mars
 
 ####################################
