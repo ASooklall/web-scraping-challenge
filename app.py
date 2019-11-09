@@ -1,3 +1,8 @@
+######################################
+#### Assignment 12 - Web Scraping ####
+########### Initialize App ###########
+######################################
+
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
 import scrape_mars
@@ -5,13 +10,17 @@ import pandas as pd
 
 app = Flask(__name__)
 
-# Use flask_pymongo to set up mongo connection
+###################################
+##### Set-up Mongo Connection #####
+###################################
+
 app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_app"
 mongo = PyMongo(app)
 
-# Or set inline
-# mongo = PyMongo(app, uri="mongodb://localhost:27017/craigslist_app")
 
+###############################
+######### APP Routes ##########
+###############################
 
 @app.route("/")
 def index():
@@ -29,3 +38,7 @@ def scraper():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+###################################
+############ End Script ###########
+###################################
